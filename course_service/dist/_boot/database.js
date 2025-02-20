@@ -27,7 +27,15 @@ exports.default = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (error) {
         console.error("MongoDB_Course_Service connection failed");
-        console.error(error.message);
+        console.error("Error Message:", error.message);
+        console.error("Full Error:", error); // 🔥 More detailed info
+        if (error.cause)
+            console.error("Cause:", error.cause); // 👈 Logs the cause if available
         process.exit(1);
     }
+    // catch (error: any) {
+    //   console.error("MongoDB_Course_Service connection failed");
+    //   console.error(error.message);
+    //   process.exit(1);
+    // }
 });
