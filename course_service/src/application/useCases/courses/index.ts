@@ -1,3 +1,5 @@
 export * from "../courses/addCourseUseCase"
 export * from "../courses/getCoursesUseCase"
 export * from "../courses/getCoursesByIdUseCase"
+export * from "../courses/toggleBlockCourseUseCase"
+export * from "../courses/getCoursesForInstructorUseCase"

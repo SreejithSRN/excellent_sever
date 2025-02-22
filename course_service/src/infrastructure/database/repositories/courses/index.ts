@@ -1,3 +1,5 @@
 export * from "../courses/addCourse"
 export * from "../courses/getCourses"
 export * from "../courses/getCoursesById"
+export * from "../courses/toggleBlockCourse"
+export * from "../courses/getCoursesForInstructor"

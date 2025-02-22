@@ -8,5 +8,7 @@ export interface  IRepositories{
     addCourse:(data:CourseEntity)=>Promise<boolean>
     getCourses:(page?:number,limit?:number)=> Promise<{data:CourseEntity[],totalCount:number} | null>
     getCoursesById:(data:string)=>Promise<CourseEntity|null>
+    toggleBlockCourse:(id:string)=>Promise<boolean|null|string>
+    getCoursesForInstructor:(page?:number,limit?:number,id?:string)=> Promise<{data:CourseEntity[],totalCount:number} | null>
     
 }

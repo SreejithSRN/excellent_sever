@@ -20,7 +20,7 @@ const blockUnblockCatController = (dependencies) => {
             res.status(httpStatusCode_1.httpStatusCode.OK).json({
                 success: true,
                 data: {},
-                message: "Blocking/Unblocking successful",
+                message: "Blocking/Unblocking category is successful",
             });
         }
         catch (error) {

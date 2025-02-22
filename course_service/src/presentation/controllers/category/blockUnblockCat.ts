@@ -12,7 +12,7 @@ export const blockUnblockCatController=(dependencies:IDependencies)=>{
             res.status(httpStatusCode.OK).json({
                 success: true,
                 data: {},
-                message: "Blocking/Unblocking successful",
+                message: "Blocking/Unblocking category is successful",
               });
         }catch (error: unknown) {
             if (error instanceof Error) {

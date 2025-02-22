@@ -10,7 +10,9 @@ const controllers = (dependencies) => {
         blockUnblockCat: (0, category_1.blockUnblockCatController)(dependencies),
         addCourse: (0, index_1.addCourseController)(dependencies),
         getCourses: (0, index_1.getCoursesController)(dependencies),
-        getCoursesById: (0, index_1.getCoursesByIdController)(dependencies)
+        getCoursesById: (0, index_1.getCoursesByIdController)(dependencies),
+        toggleBlockCourse: (0, index_1.toggleBlockCourseController)(dependencies),
+        getCoursesForInstructor: (0, index_1.getCoursesForInstructorController)(dependencies),
     };
 };
 exports.controllers = controllers;
