@@ -1,4 +1,5 @@
 import { UserEntity } from "../../../domain/entities";
+import userCreatedProducer from "../../kafka/producer/userCreatedProducer";
 import { User } from "../models";
 
 export const profileImageEdit=async(image:string, email:string ):Promise<boolean|string|UserEntity>=>{
@@ -13,6 +14,7 @@ export const profileImageEdit=async(image:string, email:string ):Promise<boolean
           );          
 
         if(result){
+           await userCreatedProducer(result)
             return result
         }else{
             return false

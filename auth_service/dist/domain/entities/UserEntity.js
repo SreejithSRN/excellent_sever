@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Profession = void 0;
+exports.Profession = exports.Role = void 0;
 var Role;
 (function (Role) {
     Role["student"] = "student";
     Role["instructor"] = "instructor";
     Role["admin"] = "admin";
-})(Role || (Role = {}));
+})(Role || (exports.Role = Role = {}));
 var Gender;
 (function (Gender) {
     Gender["male"] = "male";

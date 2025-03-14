@@ -123,6 +123,12 @@ const userSchema = new mongoose_1.Schema({
         type: Boolean,
         default: false,
     },
+    messages: {
+        rejection: {
+            type: String,
+            default: "",
+        }
+    },
     isGAuth: {
         type: Boolean,
         default: false,

@@ -23,7 +23,7 @@ const profileEdit = (data) => __awaiter(void 0, void 0, void 0, function* () {
                 role: data.role,
                 profile: data.profile,
                 contact: data.contact,
-                profession: data.profession,
+                profession: data.profession || "not working",
                 cv: data.cv,
                 isOtpVerified: true,
                 isVerified: data.isVerified,

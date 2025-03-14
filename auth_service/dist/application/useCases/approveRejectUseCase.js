@@ -14,9 +14,9 @@ const approveRejectUseCase = (dependencies) => {
     const { repositories } = dependencies;
     const { approveReject } = repositories;
     return {
-        execute: (email) => __awaiter(void 0, void 0, void 0, function* () {
+        execute: (email, reason) => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                return yield approveReject(email);
+                return yield approveReject(email, reason);
             }
             catch (error) {
                 throw new Error((error === null || error === void 0 ? void 0 : error.message) || "Error in approveReject usecases");

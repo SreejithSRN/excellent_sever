@@ -1,3 +1,3 @@
 export interface IApproveRejectUseCase{
-    execute(email:string):Promise<boolean|null>
+    execute(email:string,reason:string):Promise<boolean|null>
 }

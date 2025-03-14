@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.profileEditController = void 0;
 const httpStatusCode_1 = require("../../_lib/common/httpStatusCode");
+const userCreatedProducer_1 = __importDefault(require("../../infrastructure/kafka/producer/userCreatedProducer"));
 const profileEditController = (dependencies) => {
     const { useCases } = dependencies;
     const { profileEditUseCase } = useCases;
@@ -18,6 +22,7 @@ const profileEditController = (dependencies) => {
         try {
             const data = req.body;
             const result = yield profileEditUseCase(dependencies).execute(data);
+            yield (0, userCreatedProducer_1.default)(result);
             if (result) {
                 res.status(httpStatusCode_1.httpStatusCode.OK).json({
                     success: true,

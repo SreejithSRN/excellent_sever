@@ -18,7 +18,7 @@ export const profileEdit = async (
           role: data.role,
           profile: data.profile,
           contact: data.contact,
-          profession: data.profession,
+          profession: data.profession || "not working",
           cv: data.cv,
           isOtpVerified: true,
           isVerified: data.isVerified,

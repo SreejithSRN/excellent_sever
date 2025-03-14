@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyOtpController = void 0;
 const httpStatusCode_1 = require("../../_lib/common/httpStatusCode");
+const userCreatedProducer_1 = __importDefault(require("../../infrastructure/kafka/producer/userCreatedProducer"));
 const verifyOtpController = (dependencies) => {
     const { useCases } = dependencies;
     const { verifyOtpUseCase, createUserUseCase } = useCases;
@@ -31,7 +35,8 @@ const verifyOtpController = (dependencies) => {
                     .json({ success: false, message: "User Creation failed" });
                 return;
             }
-            // await userCreatedProducer(newUser)
+            yield (0, userCreatedProducer_1.default)(newUser);
+            console.log("I reached here after kafka produce");
             res.status(httpStatusCode_1.httpStatusCode.OK).json({
                 success: true,
                 message: "User Creation Successfully",

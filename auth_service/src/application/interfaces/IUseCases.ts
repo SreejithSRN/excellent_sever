@@ -1,5 +1,4 @@
-import {
-  
+import {  
   IApproveRejectUseCase,
   ICheckByNameUseCase,
   ICreateOtp,
@@ -35,5 +34,4 @@ export interface IUseCases {
   profileEditUseCase:(dependencies:IDependencies)=>IProfileEditUseCase
   passwordChangeUseCase:(dependencies:IDependencies)=>IPasswordChangeUseCase
   profileImageEditUseCase:(dependencies:IDependencies)=>IProfileImageEditUseCase
-
 }

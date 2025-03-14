@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 
-enum Role {
+export enum Role {
   student = "student",
   instructor = "instructor",
   admin = "admin",
@@ -59,6 +59,9 @@ export interface UserEntity {
   weeklyLogins?: boolean[];
   createdAt?: Date;
   updatedAt?: Date;
+  messages?:{
+    rejection:string
+  }
 }
 
 

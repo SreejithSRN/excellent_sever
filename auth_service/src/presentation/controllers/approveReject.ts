@@ -8,8 +8,8 @@ export const approveRejectController = (dependencies: IDependencies) => {
 
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { email } = req.body;
-      const result = await approveRejectUseCase(dependencies).execute(email);
+      const { email,reason } = req.body;      
+      const result = await approveRejectUseCase(dependencies).execute(email,reason);
       console.log(result, "iam in approveReject controller..........");
 
       res.status(httpStatusCode.OK).json({

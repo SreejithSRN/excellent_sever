@@ -33,7 +33,8 @@ export const verifyOtpController = (dependencies: IDependencies) => {
           .json({ success: false, message: "User Creation failed" });
         return;
       }
-      // await userCreatedProducer(newUser)
+      await userCreatedProducer(newUser)
+      console.log("I reached here after kafka produce")
 
       res.status(httpStatusCode.OK).json({
         success: true,

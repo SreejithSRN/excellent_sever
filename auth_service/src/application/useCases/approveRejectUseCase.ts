@@ -5,9 +5,9 @@ export const approveRejectUseCase=(dependencies:IDependencies)=>{
     const {repositories}=dependencies
     const {approveReject}=repositories
     return {
-        execute:async(email:string)=>{
+        execute:async(email:string,reason: string)=>{
             try {
-                return await approveReject(email)                
+                return await approveReject(email,reason)                
             } catch (error: constant) {
                     throw new Error(error?.message || "Error in approveReject usecases");
                   }

@@ -11,8 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.approveReject = void 0;
 const models_1 = require("../models");
-const approveReject = (email) => __awaiter(void 0, void 0, void 0, function* () {
+const approveReject = (email, reason) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
+        console.log(email, reason, "iam in the reppoooooooooooo");
         const result = yield models_1.User.findOne({ email });
         if (!result) {
             console.log("User not found");
@@ -20,6 +22,14 @@ const approveReject = (email) => __awaiter(void 0, void 0, void 0, function* () 
         }
         result.isRejected = !result.isRejected;
         result.isVerified = !result.isVerified;
+        if (reason != "") {
+            result.messages = (_a = result.messages) !== null && _a !== void 0 ? _a : { rejection: "" };
+            result.messages.rejection = reason;
+        }
+        else {
+            result.messages = { rejection: "" };
+            result.messages.rejection = reason;
+        }
         yield result.save();
         return true;
     }

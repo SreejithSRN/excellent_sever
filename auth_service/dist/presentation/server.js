@@ -4,7 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-// import cors from "cors"
+const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const config_1 = require("../_boot/config");
@@ -15,11 +16,12 @@ const dependencies_1 = require("../_boot/dependencies");
 const app = (0, express_1.default)();
 const PORT = Number(config_1.env_variables.PORT || 4001);
 // console.log(env_variables.FRONTEND_URL, "this is from auth service")
-// const corsOptions={
-//     origin:String(env_variables.FRONTEND_URL),
-//     methods:"GET,HEAD,POST,PUT,PATCH,DELETE",
-//     Credentials:true
-// }
+const corsOptions = {
+    origin: String(config_1.env_variables.FRONTEND_URL),
+    methods: "GET,HEAD,POST,PUT,PATCH,DELETE",
+    Credentials: true
+};
+app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
@@ -27,7 +29,7 @@ const morganStream = {
     write: (message) => logger_1.logger.info(message.trim())
 };
 app.use((0, morgan_1.default)('combined', { stream: morganStream }));
-// app.use(cors(corsOptions))
+app.use((0, cors_1.default)(corsOptions));
 app.use("/", (0, routers_1.routes)(dependencies_1.dependencies));
 app.all("*", (req, res) => {
     res.status(httpStatusCode_1.httpStatusCode.NOT_FOUND).json({ sussess: false, status: httpStatusCode_1.httpStatusCode.NOT_FOUND, message: "Auth_API not found" });

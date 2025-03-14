@@ -9,7 +9,7 @@ export interface IRepositories {
   getStudents:(page?:number,limit?:number)=> Promise<{data:UserEntity[],totalCount:number} | null>
   getInstructors:(page?:number,limit?:number)=> Promise<{data:UserEntity[],totalCount:number} | null>
   blockUnblock:(email:string)=>Promise<boolean|null>
-  approveReject:(email:string)=>Promise<boolean|null>
+  approveReject:(email:string,reason:string)=>Promise<boolean|null>
   registerForm:(data:UserEntity)=>Promise<boolean|null>
   profileEdit:(data:UserEntity)=>Promise<UserEntity|null>
   passwordChange:(data:PasswordChangeEntity)=>Promise<boolean|null|string>

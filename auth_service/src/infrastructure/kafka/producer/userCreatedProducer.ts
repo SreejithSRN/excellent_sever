@@ -1,7 +1,7 @@
 import { producer } from "..";
 import { UserEntity } from "../../../domain/entities";
 
-export default async (data: UserEntity) => {
+export default async (data: UserEntity|null) => {
     try {
         await producer.connect();
 
