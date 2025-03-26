@@ -4,7 +4,7 @@ import server from './presentation/server';
 
 (async () => {
     try {
-        server;
+       server
 
         await Promise.all([database(), startConsumer()]);
 

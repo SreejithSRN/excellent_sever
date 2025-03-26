@@ -33,9 +33,4 @@ exports.default = () => __awaiter(void 0, void 0, void 0, function* () {
             console.error("Cause:", error.cause); // 👈 Logs the cause if available
         process.exit(1);
     }
-    // catch (error: any) {
-    //   console.error("MongoDB_Course_Service connection failed");
-    //   console.error(error.message);
-    //   process.exit(1);
-    // }
 });

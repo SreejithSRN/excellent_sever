@@ -16,7 +16,7 @@ const PORT:number=Number(env_variables.PORT ||4002)
 const corsOptions={
     origin:String(env_variables.FRONTEND_URL),
     methods:"GET,HEAD,POST,PUT,PATCH,DELETE",
-    Credentials:true
+    credentials:true
 }
 
 app.use(helmet())

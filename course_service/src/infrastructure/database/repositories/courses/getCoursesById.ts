@@ -7,10 +7,18 @@ export const getCoursesById = async (data: string): Promise<any> => {
     let result = await Course.findOne({ _id: data })
       .populate("categoryRef")
       .populate("instructorRef")
-      .lean();
+     
+
+      console.log(result ,"important value to be checked")
+
+
+
+
     if (!result) {
       throw new Error("Something went wrong while fetching the course details in repository");
     } 
+    
+    
     return result
   } catch (error: unknown) {
     if (error instanceof Error) {

@@ -18,7 +18,7 @@ const PORT = Number(config_1.env_variables.PORT || 4002);
 const corsOptions = {
     origin: String(config_1.env_variables.FRONTEND_URL),
     methods: "GET,HEAD,POST,PUT,PATCH,DELETE",
-    Credentials: true
+    credentials: true
 };
 app.use((0, helmet_1.default)());
 app.use(express_1.default.json());

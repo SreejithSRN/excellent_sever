@@ -22,15 +22,17 @@ export const getCoursesForInstructor = async (
     const objectId = new Types.ObjectId(id);
 
     const [rawData, totalCount] = await Promise.all([
-      Course.find({ instructorRef: objectId }) // ✅ Filtering by instructor ID if that's the purpose
+      Course.find({ instructorRef: objectId }) 
         .populate("categoryRef")
         .populate("instructorRef")
         .sort({ updatedAt: "descending" })
         .skip(skipNo)
         .limit(validLimit)
         .lean(),
-      Course.countDocuments({ instructorRef: objectId }), // ✅ Matching the same filter
+      Course.countDocuments({ instructorRef: objectId }), 
     ]);
+
+    console.log(rawData, "data for the instructor courses")
 
     if (!rawData.length) {
       console.warn("No courses found for the given ID.");

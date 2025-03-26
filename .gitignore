@@ -16,6 +16,7 @@ notification_service/dist
 
 payment_service/node_modules
 payment_service/.env
+payment_service/dist
 payment_service/logs
 
 course_service/node_modules
