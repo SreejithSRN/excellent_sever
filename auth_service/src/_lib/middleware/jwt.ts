@@ -21,7 +21,7 @@ const verifyToken = (token: string, secret: string): UserPayload | null => {
       console.error(`Error verifying token: ${err.message}`);
       return null;
     }
-    throw err;
+    throw err
   }
 };
 

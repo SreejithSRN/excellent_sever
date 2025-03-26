@@ -1,12 +1,12 @@
-import { ObjectId } from "mongoose";
+import {  Types } from "mongoose";
 
 export interface CourseEntity{
     id?:string
-    _id?:string | ObjectId;
+    _id?:string | Types.ObjectId;
     title?: string;
     description?: string;
-    categoryRef?: string | ObjectId;
-    instructorRef?: string | ObjectId;
+    categoryRef?: string | Types.ObjectId;
+    instructorRef?: string | Types.ObjectId;
     language?: Language;
     thumbnail?: string;
     level?: Level;

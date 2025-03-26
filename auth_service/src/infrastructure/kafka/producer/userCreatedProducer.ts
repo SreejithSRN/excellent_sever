@@ -5,7 +5,7 @@ export default async (data: UserEntity|null) => {
     try {
         await producer.connect();
 
-        const message = {
+        const message = [{
             topic: "course-service-topic",
             messages: [
                 {
@@ -13,9 +13,27 @@ export default async (data: UserEntity|null) => {
                     value: JSON.stringify(data),
                 },
             ],
-        };
+        },
+        {
+            topic: "payment-service-topic",
+            messages: [
+                {
+                    key: "userCreated",
+                    value: JSON.stringify(data),
+                },
+            ],
+        },
+        {
+            topic: "chat-service-topic",
+            messages: [
+                {
+                    key: "userCreated",
+                    value: JSON.stringify(data),
+                },
+            ],
+        }];
 
-        await producer.send(message);
+        await producer.sendBatch({topicMessages: message});
 
         console.log("Message sent successfully to Kafka topic.");
     } catch (error: unknown) {

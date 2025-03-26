@@ -12,9 +12,10 @@ export const routes=(dependencies:IDependencies)=>{
 
     router.route("/create-checkout-session")
     .post(roleAuthMiddleware(Role.student),createCheckOutSession);
+    
 
     router.route("/webhook")
-    .post(roleAuthMiddleware(Role.student),express.raw({ type: 'application/json' }),stripeWebhook );
+    .post(express.raw({ type: 'application/json' }),stripeWebhook );
 
     return router
 

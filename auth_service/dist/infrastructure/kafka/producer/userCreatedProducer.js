@@ -13,16 +13,34 @@ const __1 = require("..");
 exports.default = (data) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield __1.producer.connect();
-        const message = {
-            topic: "course-service-topic",
-            messages: [
-                {
-                    key: "userCreated",
-                    value: JSON.stringify(data),
-                },
-            ],
-        };
-        yield __1.producer.send(message);
+        const message = [{
+                topic: "course-service-topic",
+                messages: [
+                    {
+                        key: "userCreated",
+                        value: JSON.stringify(data),
+                    },
+                ],
+            },
+            {
+                topic: "payment-service-topic",
+                messages: [
+                    {
+                        key: "userCreated",
+                        value: JSON.stringify(data),
+                    },
+                ],
+            },
+            {
+                topic: "chat-service-topic",
+                messages: [
+                    {
+                        key: "userCreated",
+                        value: JSON.stringify(data),
+                    },
+                ],
+            }];
+        yield __1.producer.sendBatch({ topicMessages: message });
         console.log("Message sent successfully to Kafka topic.");
     }
     catch (error) {

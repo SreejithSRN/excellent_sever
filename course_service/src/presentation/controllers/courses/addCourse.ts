@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { httpStatusCode } from "../../../_lib/common/httpStatusCode";
 import { IDependencies } from "../../../application/interfaces/IDependencies";
 import { PricingType } from "../../../domain/entities/courseEntity";
+import createCourseProduce from "../../../infrastructure/kafka/producer/createCourseProduce";
 
 export const addCourseController = (dependencies: IDependencies) => {
   const {
@@ -38,6 +39,9 @@ export const addCourseController = (dependencies: IDependencies) => {
           })
           return
       }
+
+      
+
       res.status(httpStatusCode.OK).json({
         success: true,
         data: response,

@@ -34,7 +34,9 @@ export const roleAuthMiddleware= (role?:Role) =>  async (
     const { access_token, refresh_token } = req.cookies;
     let user: UserPayload | null = null;
     if (access_token) {     
+      
       user = verifyToken(access_token, env_variables.ACCESS_TOKEN_SECRET);
+      if(!user) return res.status(500).json({ message: "Internal server error." });
     }
     if (!user && refresh_token) {
       user = verifyToken(refresh_token, env_variables.REFRESH_TOKEN_SECRET);

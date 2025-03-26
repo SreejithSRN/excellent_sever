@@ -1,4 +1,5 @@
 import { CourseEntity } from "../../../../domain/entities/courseEntity";
+import createCourseProduce from "../../../kafka/producer/createCourseProduce";
 import { Course } from "../../models/courseModel";
 
 export const addCourse = async (data: CourseEntity) => {
@@ -34,7 +35,18 @@ export const addCourse = async (data: CourseEntity) => {
           runValidators: true,
         }
       );
-      return !!updatedCourse;
+
+      if (!updatedCourse) {
+        console.log("Course update failed.");
+        return false;
+      }
+      const { createdAt, updatedAt, ...course } = updatedCourse.toObject();
+
+      await createCourseProduce(course)
+            console.log("I reached here after kafka produce")
+            return true
+
+      // return !!updatedCourse;
     } else {
       // ✨ Create new course
       const newCourse = new Course({
@@ -59,6 +71,10 @@ export const addCourse = async (data: CourseEntity) => {
       });
 
       const savedCourse = await newCourse.save();
+      const { createdAt, updatedAt, ...course } = savedCourse.toObject();
+
+      await createCourseProduce(course)
+            console.log("I reached here after kafka produce")
       return !!savedCourse;
     }
   } catch (error: unknown) {
