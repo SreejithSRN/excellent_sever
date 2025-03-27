@@ -25,7 +25,7 @@ const verifyToken = (token: string, secret: string): UserPayload | null => {
   }
 };
 
-export const roleAuthMiddleware= (role?:Role) =>  async (
+export const roleAuthMiddleware= (role?:Role) =>  {return async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -36,7 +36,7 @@ export const roleAuthMiddleware= (role?:Role) =>  async (
     if (access_token) {     
       
       user = verifyToken(access_token, env_variables.ACCESS_TOKEN_SECRET);
-      if(!user) return res.status(500).json({ message: "Internal server error." });
+      
     }
     if (!user && refresh_token) {
       user = verifyToken(refresh_token, env_variables.REFRESH_TOKEN_SECRET);
@@ -46,7 +46,7 @@ export const roleAuthMiddleware= (role?:Role) =>  async (
           email: user.email,
           role: user.role,
         });
-        res.cookie("acces_token", newAccessToken, {
+        res.cookie("access_token", newAccessToken, {
           httpOnly: true,
           secure: true,
           sameSite: "none",
@@ -73,3 +73,4 @@ export const roleAuthMiddleware= (role?:Role) =>  async (
     return res.status(500).json({ message: "Internal server error." });
   }
 };
+}

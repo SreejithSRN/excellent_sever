@@ -7,8 +7,11 @@ export const blockUnblockCatUseCase=(dependencies:IDependencies)=>{
         execute:async(id:string)=>{
             try {
                 return await blockUnblockCat(id)
-            }  catch (error: constant) {
-                throw new Error(error?.message || "Error in blockUnblock usecases");
+            }  catch (error: unknown) {
+                if (error instanceof Error) {
+                  throw new Error(error.message);
+                }
+                throw new Error("An unknown error occurred");
               }
         }
     }

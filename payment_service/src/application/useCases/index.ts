@@ -1,3 +1,3 @@
-export const useCase={
+export * from "./savePaymentUseCase"
+export * from "./getPaymentUseCase"
 
-}

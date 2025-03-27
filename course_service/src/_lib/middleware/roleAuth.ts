@@ -44,7 +44,7 @@ export const roleAuthMiddleware= (role?:Role) =>  async (
           email: user.email,
           role: user.role,
         });
-        res.cookie("acces_token", newAccessToken, {
+        res.cookie("access_token", newAccessToken, {
           httpOnly: true,
           secure: true,
           sameSite: "none",

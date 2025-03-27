@@ -13,8 +13,11 @@ export const addCourseUseCase = (dependencies: IDependencies) => {
         const result=await addCourse(data)
         console.log(result,"iam in addcourse repository")
         return result
-      } catch (error: constant) {
-        throw new Error(error?.message || "Error in addCourse usecases");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+        throw new Error("An unknown error occurred");
       }
     },
   };

@@ -8,11 +8,12 @@ import express from 'express';
 export const routes=(dependencies:IDependencies)=>{
     const router= Router()
 
-    const {createCheckOutSession,stripeWebhook}=controllers(dependencies)
+    const {createCheckOutSession,stripeWebhook,getPayment}=controllers(dependencies)
 
     router.route("/create-checkout-session")
     .post(roleAuthMiddleware(Role.student),createCheckOutSession);
     
+    router.route("/getpayment").get(roleAuthMiddleware(),getPayment)
 
     router.route("/webhook")
     .post(express.raw({ type: 'application/json' }),stripeWebhook );

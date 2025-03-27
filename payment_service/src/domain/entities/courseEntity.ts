@@ -13,7 +13,6 @@ export interface CourseEntity{
     pricing?: Pricing;
     lessons?:Lesson[];
     isBlocked?:boolean;
-
 }
 
 export enum Language{

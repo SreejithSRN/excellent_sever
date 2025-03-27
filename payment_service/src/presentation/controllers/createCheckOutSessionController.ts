@@ -28,7 +28,7 @@ export const createCheckOutSessionController=(dependencies:IDependencies)=>{
                 line_items,
                 mode: 'payment',
                 success_url: `${env_variables.FRONTEND_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}&amount=${amount}&currency=INR&courseId=${courseId}&userId=${userId}`,
-                cancel_url: `${env_variables.FRONTEND_URL}/payment/paymentFailure`,
+                cancel_url: `${env_variables.FRONTEND_URL}/payment/failure`,
                 metadata: {
                     courseId,
                     userId,

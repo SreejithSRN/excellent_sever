@@ -20,7 +20,10 @@ const addCategoryUseCase = (dependencies) => {
                 return result;
             }
             catch (error) {
-                throw new Error((error === null || error === void 0 ? void 0 : error.message) || "Error in approveReject usecases");
+                if (error instanceof Error) {
+                    throw new Error(error.message);
+                }
+                throw new Error("An unknown error occurred");
             }
         })
     };

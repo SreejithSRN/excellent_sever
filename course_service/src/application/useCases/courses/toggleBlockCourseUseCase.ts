@@ -11,10 +11,11 @@ export const toggleBlockCourseUseCase = (dependencies: IDependencies) => {
         console.log(id, "iam from toggleBlockCourse Usecase");
         const result = await toggleBlockCourse(id);
         return result;
-      } catch (error: constant) {
-        throw new Error(
-          error?.message || "Error in toggleBlockCourse usecases"
-        );
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+        throw new Error("An unknown error occurred");
       }
     },
   };

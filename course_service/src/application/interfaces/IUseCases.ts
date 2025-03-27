@@ -6,7 +6,7 @@ import {
   IGetCoursesUseCase,
   IGetCoursesByIdUseCase,
   IToggleBlockCourseUseCase,
-  IGetCoursesForInstructorUseCase,
+  IGetCoursesForInstructorUseCase,IAddEnrollmentUseCase
 } from "../../domain/IUseCases";
 
 import { IDependencies } from "./IDependencies";
@@ -20,4 +20,5 @@ export interface IUseCases {
   getCoursesByIdUseCase: (dependencies: IDependencies) => IGetCoursesByIdUseCase;
   toggleBlockCourseUseCase: (dependencies: IDependencies) => IToggleBlockCourseUseCase;
   getCoursesForInstructorUseCase: (dependencies: IDependencies) => IGetCoursesForInstructorUseCase;
+  addEnrollmentUseCase:(dependencies:IDependencies)=>IAddEnrollmentUseCase
 }

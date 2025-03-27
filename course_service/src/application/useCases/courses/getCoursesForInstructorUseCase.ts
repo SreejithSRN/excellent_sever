@@ -14,9 +14,12 @@ export const getCoursesForInstructorUseCase=(dependencies:IDependencies)=>{
                 let result = await getCoursesForInstructor(page, limit,id);
                 return result
                 
-            } catch (error: constant) {
-                        throw new Error(error?.message || "Error in getCourses usecases");
-                      }
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                  throw new Error(error.message);
+                }
+                throw new Error("An unknown error occurred");
+              }
         }
     }
 }

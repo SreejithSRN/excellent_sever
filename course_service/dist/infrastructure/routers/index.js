@@ -7,7 +7,7 @@ const roleAuth_1 = require("../../_lib/middleware/roleAuth");
 const entities_1 = require("../../domain/entities");
 const routes = (dependencies) => {
     const router = (0, express_1.Router)();
-    const { addCategory, getCategories, blockUnblockCat, addCourse, getCourses, getCoursesById, toggleBlockCourse, getCoursesForInstructor } = (0, controllers_1.controllers)(dependencies);
+    const { addCategory, getCategories, blockUnblockCat, addCourse, getCourses, getCoursesById, toggleBlockCourse, getCoursesForInstructor, createEnrollment } = (0, controllers_1.controllers)(dependencies);
     router.route("/addCategory").post((0, roleAuth_1.roleAuthMiddleware)(entities_1.Role.admin), addCategory);
     router.route("/getCategories").get((0, roleAuth_1.roleAuthMiddleware)(), getCategories);
     router.route("/blockUnblockCat").post((0, roleAuth_1.roleAuthMiddleware)(entities_1.Role.admin), blockUnblockCat);
@@ -16,6 +16,7 @@ const routes = (dependencies) => {
     router.route("/getCoursesById/:id").get((0, roleAuth_1.roleAuthMiddleware)(), getCoursesById);
     router.route("/toggleBlockCourse").put((0, roleAuth_1.roleAuthMiddleware)(entities_1.Role.instructor), toggleBlockCourse);
     router.route("/getCoursesForInstructor").get((0, roleAuth_1.roleAuthMiddleware)(entities_1.Role.instructor), getCoursesForInstructor);
+    router.route("/createEnrollment").post((0, roleAuth_1.roleAuthMiddleware)(entities_1.Role.student), createEnrollment);
     return router;
 };
 exports.routes = routes;

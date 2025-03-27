@@ -1,4 +1,4 @@
-import { CategoryEntity } from "../../domain/entities";
+import { CategoryEntity, EnrollmentEntity } from "../../domain/entities";
 import { CourseEntity } from "../../domain/entities/courseEntity";
 
 export interface  IRepositories{
@@ -10,5 +10,6 @@ export interface  IRepositories{
     getCoursesById:(data:string)=>Promise<CourseEntity|null>
     toggleBlockCourse:(id:string)=>Promise<boolean|null|string>
     getCoursesForInstructor:(page?:number,limit?:number,id?:string)=> Promise<{data:CourseEntity[],totalCount:number} | null>
+    enrollmentCreated:(data:EnrollmentEntity)=>Promise<boolean>
     
 }

@@ -6,7 +6,7 @@ import { Role } from "../../domain/entities";
 
 export const routes=(dependencies:IDependencies)=>{
     const router= Router()
-    const {addCategory,getCategories,blockUnblockCat,addCourse,getCourses,getCoursesById,toggleBlockCourse,getCoursesForInstructor}=controllers(dependencies)
+    const {addCategory,getCategories,blockUnblockCat,addCourse,getCourses,getCoursesById,toggleBlockCourse,getCoursesForInstructor,createEnrollment}=controllers(dependencies)
 
     router.route("/addCategory").post(roleAuthMiddleware(Role.admin),addCategory)
     router.route("/getCategories").get(roleAuthMiddleware(),getCategories)
@@ -16,6 +16,7 @@ export const routes=(dependencies:IDependencies)=>{
     router.route("/getCoursesById/:id").get(roleAuthMiddleware(),getCoursesById)
     router.route("/toggleBlockCourse").put(roleAuthMiddleware(Role.instructor),toggleBlockCourse)
     router .route("/getCoursesForInstructor").get(roleAuthMiddleware(Role.instructor),getCoursesForInstructor)
+    router.route("/createEnrollment").post(roleAuthMiddleware(Role.student),createEnrollment)
 
     return router
 

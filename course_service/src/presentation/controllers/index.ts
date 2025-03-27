@@ -4,6 +4,7 @@ import {
   getCategoriesController,
   blockUnblockCatController,
 } from "./category";
+
 import {
   getCoursesController,
   addCourseController,
@@ -11,6 +12,7 @@ import {
   toggleBlockCourseController,
   getCoursesForInstructorController,
 } from "./courses/index";
+import { addEnrollmentController } from "./enrollment";
 
 export const controllers = (dependencies: IDependencies) => {
   return {
@@ -22,5 +24,6 @@ export const controllers = (dependencies: IDependencies) => {
     getCoursesById: getCoursesByIdController(dependencies),
     toggleBlockCourse: toggleBlockCourseController(dependencies),
     getCoursesForInstructor: getCoursesForInstructorController(dependencies),
+    createEnrollment:addEnrollmentController(dependencies)
   };
 };

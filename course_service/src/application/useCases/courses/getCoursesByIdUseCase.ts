@@ -16,8 +16,11 @@ export const getCoursesByIdUseCase = (dependencies: IDependencies) => {
           );
         }      
         return result;
-      } catch (error: constant) {
-        throw new Error(error?.message || "Error in getCoursesById usecases");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+        throw new Error("An unknown error occurred");
       }
     },
   };
