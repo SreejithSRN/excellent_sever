@@ -26,10 +26,14 @@ const PricingSchema = new Schema({
 
 // Lesson Schema
 const LessonSchema = new Schema({
+  lessonNumber: {
+    type: Number,
+    required: true,
+  },
   title: { type: String, required: true },
   description: { type: String, required: true },
-  video: { type: String, required: true }, 
-  duration: { type: String, required: true }, 
+  video: { type: String, required: true },
+  duration: { type: String, required: true },
 });
 
 // Course Schema
@@ -37,12 +41,20 @@ const CourseSchema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    categoryRef: { type: mongoose.Schema.Types.ObjectId, ref: "categories", required: true },
-    instructorRef: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    categoryRef: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "categories",
+      required: true,
+    },
+    instructorRef: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     language: { type: String, enum: Object.values(Language), required: true },
     level: { type: String, enum: Object.values(Level), required: true },
     pricing: { type: PricingSchema, required: true },
-    thumbnail: { type: String, required: true }, 
+    thumbnail: { type: String, required: true },
     lessons: [LessonSchema],
     isBlocked: { type: Boolean, default: false },
   },

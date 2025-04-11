@@ -4,5 +4,12 @@ export interface IRepositories {
   getPayments: (data: {
     studentId: string;
     role: string;
-  }) => Promise<paymentDetailsProps[] | []>;
+    page?: number;
+    limit?: number;
+  }) => Promise<{
+    payments: paymentDetailsProps[];
+    totalCount: number;
+    totalAmount: number;
+    totalCourses: number
+  }>;
 }

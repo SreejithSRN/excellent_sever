@@ -21,48 +21,70 @@ app.use(cookieParser());
 
 // Logging with Morgan
 const morganStream = {
-    write: (message: any) => logger.info(message.trim()),
+  write: (message: any) => logger.info(message.trim()),
 };
 app.use(morgan("combined", { stream: morganStream }));
 
-// CORS Configuration
 const corsOptions = {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
-    methods: ["GET", "POST", "HEAD", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  methods: "GET,HEAD,POST,PUT,PATCH,DELETE",
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "Cookie", "Range"],
+  exposedHeaders: ["Content-Range", "Content-Length", "Accept-Ranges"],
 };
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Rate Limiting (15 minutes, max 100 requests)
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
 });
 app.use(limiter);
 
 // API Gateway Routing
 const routes = [
-    // { path: "/api/user", serviceUrl: process.env.USER_SERVICE },
-    { path: "/api/auth", serviceUrl: process.env.AUTH_SERVICE },
-    { path: "/api/course", serviceUrl: process.env.COURSE_SERVICE },
-    { path: "/api/notification", serviceUrl: process.env.NOTIFICATION_SERVICE },
-    { path: "/api/payment", serviceUrl: process.env.PAYMENT_SERVICE },
-    { path: "/api/chat", serviceUrl: process.env.CHAT_SERVICE },
+  // { path: "/api/user", serviceUrl: process.env.USER_SERVICE },
+  { path: "/api/auth", serviceUrl: process.env.AUTH_SERVICE },
+  { path: "/api/course", serviceUrl: process.env.COURSE_SERVICE },
+  { path: "/api/notification", serviceUrl: process.env.NOTIFICATION_SERVICE },
+  { path: "/api/payment", serviceUrl: process.env.PAYMENT_SERVICE },
+  { path: "/api/chat", serviceUrl: process.env.CHAT_SERVICE },
 ];
 
 routes.forEach(({ path, serviceUrl }) => {
-    if (serviceUrl) {
-        app.use(path, proxy(serviceUrl));
-    } else {
-        console.warn(`Warning: Missing service URL for ${path}`);
-    }
+  if (serviceUrl) {
+    app.use(path, proxy(serviceUrl));
+  } else {
+    console.warn(`Warning: Missing service URL for ${path}`);
+  }
 });
 
 // Start API Gateway
 app.listen(PORT, () => {
-    console.log(`API Gateway is running on port ${PORT}`);
+  console.log(`API Gateway is running on port ${PORT}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -96,7 +118,6 @@ app.listen(PORT, () => {
 // import rateLimit from "express-rate-limit";
 // import { logger } from "./middleware/logger"
 
-
 // dotenv.config()
 
 // const app:Application=express()
@@ -108,10 +129,9 @@ app.listen(PORT, () => {
 // app.use(cookieParser())
 
 // const morganStream = {
-//     write: (message: any) => logger.info(message.trim()) 
+//     write: (message: any) => logger.info(message.trim())
 // };
 // app.use(morgan('combined', { stream: morganStream }));
-
 
 // const corsOptions = {
 //     origin: process.env.CLIENT_URL as string,

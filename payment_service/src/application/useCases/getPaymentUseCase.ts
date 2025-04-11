@@ -1,17 +1,56 @@
+// import { paymentDetailsProps } from "../../domain/entities/paymentEntity";
+// import { IDependencies } from "../interfaces/IDependencies";
+
+// export const getPaymentUseCase=(dependencies:IDependencies)=>{
+//     const {repositories:{getPayments}}=dependencies
+//     return {
+//         execute:async(data:{studentId:string,role:string,page?:number,limit?:number}):Promise<paymentDetailsProps[]|[];totalCount: number >=>{
+//             try {
+//                 const response=await getPayments(data)
+
+//                 return response
+                
+//             } catch(error){
+//                 throw new Error((error as Error)?.message);
+//             }
+//         }
+//     }
+// }
+
+
+import { paymentDetailsProps } from "../../domain/entities/paymentEntity";
 import { IDependencies } from "../interfaces/IDependencies";
 
-export const getPaymentUseCase=(dependencies:IDependencies)=>{
-    const {repositories:{getPayments}}=dependencies
-    return {
-        execute:async(data:{studentId:string,role:string})=>{
-            try {
-                const response=await getPayments(data)
+export const getPaymentUseCase = (dependencies: IDependencies) => {
+  const {
+    repositories: { getPayments },
+  } = dependencies;
 
-                return response
-                
-            } catch(error){
-                throw new Error((error as Error)?.message);
-            }
-        }
-    }
-}
+  return {
+    execute: async (data: {
+      studentId: string;
+      role: string;
+      page?: number;
+      limit?: number;
+    }): Promise<{
+      payments: paymentDetailsProps[]; 
+      totalCount: number;
+      totalAmount:number;
+       totalCourses:number
+    }> => {
+      try {        
+
+        const response = await getPayments(data);
+
+        return {
+          payments: response.payments,
+          totalCount: response.totalCount,
+          totalAmount: response.totalAmount,
+          totalCourses: response.totalCourses,
+        };
+      } catch (error) {
+        throw new Error((error as Error)?.message);
+      }
+    },
+  };
+};

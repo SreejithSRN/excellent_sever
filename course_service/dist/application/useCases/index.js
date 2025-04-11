@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./category"), exports);
 __exportStar(require("./courses"), exports);
 __exportStar(require("./enrollment"), exports);
+__exportStar(require("./assesment"), exports);

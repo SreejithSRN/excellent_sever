@@ -14,7 +14,7 @@ export const sendOTP = async (email: string, otp: string | number) => {
 
   const message = "Enter this OTP to continue ";
   const mailData = {
-    from: "trainersmavoor@gmail.com",
+    from: "excellent@gmail.com",
     to: email,
     subject: "OTP from Excellent",
     html: `<p>${message}</p> <p style='color: red; font-size: 25px; letter-spacing: 2px'><b>${otp}</b></p>`,

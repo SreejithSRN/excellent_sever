@@ -5,4 +5,6 @@ const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
 exports.env_variables = {
     PORT: process.env.PORT,
+    USERMAIL: String(process.env.USERMAIL),
+    USERSECRET: String(process.env.USERSECRET)
 };

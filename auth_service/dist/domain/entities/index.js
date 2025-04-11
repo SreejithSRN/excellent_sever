@@ -16,3 +16,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./UserEntity"), exports);
 __exportStar(require("./otpEntity"), exports);
+__exportStar(require("./MessageEntity"), exports);

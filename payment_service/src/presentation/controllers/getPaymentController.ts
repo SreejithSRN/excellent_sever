@@ -6,17 +6,40 @@ export const getPaymentController = (dependencies: IDependencies) => {
   const {
     useCases: { getPaymentUseCase },
   } = dependencies;
+  const isValidNumber = (value: any) => !isNaN(parseInt(value, 10));
 
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log(req.query,"incoming payment  query")
+
+      const page = req.query.page ? parseInt(req.query.page as string, 10) : 1;
+      const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 10;
+      if (!isValidNumber(page)) {
+        res.status(httpStatusCode.BAD_REQUEST).json({
+            success: false,
+            message: "Invalid page number",
+        });
+        return;
+    }
+
+    if (!isValidNumber(limit)) {
+        res.status(httpStatusCode.BAD_REQUEST).json({
+            success: false,
+            message: "Invalid limit number",
+        });
+        return;
+    }
       const studentId = req.user?._id;
       const role = req.user?.role
       if (!studentId&&!role) {
         throw new Error("Student ID is missing");
       }
-      const data = {studentId: studentId as string,role:role as string}
+      const data = {studentId: studentId as string,role:role as string,page,
+        limit}
 
       const result = await getPaymentUseCase(dependencies).execute(data);
+
+      console.log(result, "iam in the sreejiththththththth");
 
    
       if(!result){

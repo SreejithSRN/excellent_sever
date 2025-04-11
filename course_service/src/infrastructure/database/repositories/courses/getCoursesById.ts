@@ -18,6 +18,12 @@ export const getCoursesById = async (data: string): Promise<any> => {
       throw new Error("Something went wrong while fetching the course details in repository");
     } 
     
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    console.log(">>>>from getcoursesbyid>",result)
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     
     return result
   } catch (error: unknown) {

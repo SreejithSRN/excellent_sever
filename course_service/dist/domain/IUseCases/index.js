@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./ICategory"), exports);
 __exportStar(require("./ICourses"), exports);
 __exportStar(require("./IEnrollment"), exports);
+__exportStar(require("./IAssesment"), exports);

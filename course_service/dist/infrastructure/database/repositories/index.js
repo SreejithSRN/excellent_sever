@@ -18,3 +18,4 @@ __exportStar(require("./category"), exports);
 __exportStar(require("./courses"), exports);
 __exportStar(require("./user"), exports);
 __exportStar(require("./enrollment"), exports);
+__exportStar(require("./assesment"), exports);

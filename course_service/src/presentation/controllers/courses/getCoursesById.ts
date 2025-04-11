@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../../application/interfaces/IDependencies";
-import { CourseEntity } from "../../../domain/entities/courseEntity";
+// import { CourseEntity } from "../../../domain/entities/courseEntity";
 import { httpStatusCode } from "../../../_lib/common/httpStatusCode";
 
 export const getCoursesByIdController=(dependencies:IDependencies)=>{

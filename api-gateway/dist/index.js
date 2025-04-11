@@ -25,14 +25,15 @@ const morganStream = {
     write: (message) => logger_1.logger.info(message.trim()),
 };
 app.use((0, morgan_1.default)("combined", { stream: morganStream }));
-// CORS Configuration
 const corsOptions = {
     origin: process.env.CLIENT_URL || "http://localhost:3000",
-    methods: ["GET", "POST", "HEAD", "PUT", "PATCH", "DELETE"],
+    methods: "GET,HEAD,POST,PUT,PATCH,DELETE",
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie", "Range"],
+    exposedHeaders: ["Content-Range", "Content-Length", "Accept-Ranges"],
 };
 app.use((0, cors_1.default)(corsOptions));
+app.options("*", (0, cors_1.default)(corsOptions));
 // Rate Limiting (15 minutes, max 100 requests)
 const limiter = (0, express_rate_limit_1.default)({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -77,7 +78,7 @@ app.listen(PORT, () => {
 // app.use(express.urlencoded({extended:true}))
 // app.use(cookieParser())
 // const morganStream = {
-//     write: (message: any) => logger.info(message.trim()) 
+//     write: (message: any) => logger.info(message.trim())
 // };
 // app.use(morgan('combined', { stream: morganStream }));
 // const corsOptions = {

@@ -26,7 +26,7 @@ export enum Level {
     Intermediate = 'intermediate',
     Advanced = 'expert'
 }
-interface Pricing {
+export interface Pricing {
     amount?: number;
     type?: PricingType;
 }
@@ -35,7 +35,8 @@ export enum PricingType {
     Paid = 'paid'
 }
 
-export interface Lesson {   
+export interface Lesson { 
+    lessonNumber?: number,  
     title?: string;
     description?: string; 
     video?: File|string;

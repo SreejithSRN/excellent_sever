@@ -23,6 +23,7 @@ export const addCourse = async (data: CourseEntity) => {
           },
           thumbnail: data.thumbnail,
           lessons: data.lessons?.map((lesson) => ({
+            lessonNumber:lesson.lessonNumber,
             title: lesson.title,
             description: lesson.description,
             video: lesson.video,
@@ -62,6 +63,7 @@ export const addCourse = async (data: CourseEntity) => {
         },
         thumbnail: data.thumbnail,
         lessons: data.lessons?.map((lesson) => ({
+          lessonNumber:lesson.lessonNumber,
           title: lesson.title,
           description: lesson.description,
           video: lesson.video,

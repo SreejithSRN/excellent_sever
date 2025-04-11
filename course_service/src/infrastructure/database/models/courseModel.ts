@@ -26,6 +26,10 @@ const PricingSchema = new Schema({
 
 // Lesson Schema
 const LessonSchema = new Schema({
+  lessonNumber: {
+        type: Number,
+        required: true
+    },
   title: { type: String, required: true },
   description: { type: String, required: true },
   video: { type: String, required: true }, 

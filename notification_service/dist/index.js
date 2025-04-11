@@ -12,10 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const consumer_1 = require("./_boot/consumer");
 const server_1 = __importDefault(require("./presentation/server"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         server_1.default;
+        yield (0, consumer_1.startConsumer)();
         console.log("Notification service started successfully");
     }
     catch (error) {

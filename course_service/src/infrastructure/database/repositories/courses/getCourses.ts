@@ -33,6 +33,7 @@ export const getCourses = async (
       instructorRef: course.instructorRef
         ? (course.instructorRef as { _id: Types.ObjectId })._id.toString()
         : undefined,
+        lessons: course.lessons?.length ? [course.lessons[0]] : [], 
     }));
     
 

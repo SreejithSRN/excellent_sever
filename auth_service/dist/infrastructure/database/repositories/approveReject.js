@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.approveReject = void 0;
+const messageServiceProducer_1 = __importDefault(require("../../kafka/producer/messageServiceProducer"));
 const models_1 = require("../models");
 const approveReject = (email, reason) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -30,7 +34,21 @@ const approveReject = (email, reason) => __awaiter(void 0, void 0, void 0, funct
             result.messages = { rejection: "" };
             result.messages.rejection = reason;
         }
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(">>>>>>>>>>>>iam here in repo approve reject>>>>>>>>>>>", result);
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>");
         yield result.save();
+        const data = {
+            senderId: "admin-Excellent",
+            receiverId: result.email,
+            content: result.isRejected
+                ? `Your instructor request has been rejected. Reason: ${reason}`
+                : `Your instructor request has been approved. Welcome aboard!`,
+            timestamp: new Date().toISOString(), // optional
+        };
+        yield (0, messageServiceProducer_1.default)(data);
         return true;
     }
     catch (error) {
