@@ -6,5 +6,5 @@ export interface EnrollmentEntity {
     courseId: Types.ObjectId;
     enrolledAt?: Date | string; 
     isTestCompleted?:boolean;
-    mark?:number   
+    mark?:number[]   
 }

@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCategoriesController = void 0;
+const httpStatusCode_1 = require("../../../_lib/common/httpStatusCode");
 const getCategoriesController = (dependencies) => {
     const { useCases: { getCategoriesUseCase } } = dependencies;
     const isValidNumber = (value) => !isNaN(parseInt(value, 10));
@@ -26,7 +27,7 @@ const getCategoriesController = (dependencies) => {
                 return;
             }
             if (!isValidNumber(limit)) {
-                res.status(400).json({
+                res.status(httpStatusCode_1.httpStatusCode.BAD_REQUEST).json({
                     success: false,
                     message: "Invalid limit number",
                 });
@@ -34,12 +35,12 @@ const getCategoriesController = (dependencies) => {
             }
             const result = yield getCategoriesUseCase(dependencies).execute(page, limit);
             if (!result) {
-                res.status(404).json({ success: false, message: "No categories found" });
+                res.status(httpStatusCode_1.httpStatusCode.NOT_FOUND).json({ success: false, message: "No categories found" });
                 return;
             }
             // console.log(`Fetched result for page ${page} and limit ${limit}:`, result);
             const { data, totalCount } = result;
-            res.status(200).json({
+            res.status(httpStatusCode_1.httpStatusCode.OK).json({
                 success: true,
                 data, totalCount,
                 message: "All categories fetched successfully",

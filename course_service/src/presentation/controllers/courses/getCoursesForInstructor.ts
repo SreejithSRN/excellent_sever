@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../../application/interfaces/IDependencies";
+import { httpStatusCode } from "../../../_lib/common/httpStatusCode";
+import { CourseFilterEntity } from "../../../domain/entities/courseEntity";
 
  export const getCoursesForInstructorController=(dependencies:IDependencies)=>{
     const {useCases:{getCoursesForInstructorUseCase}}=dependencies
@@ -11,7 +13,7 @@ import { IDependencies } from "../../../application/interfaces/IDependencies";
             const id = req.query.id ? String(req.query.id) : undefined;
 
             if (!isValidNumber(page)) {
-                res.status(400).json({
+                res.status(httpStatusCode.BAD_REQUEST).json({
                     success: false,
                     message: "Invalid page number",
                 });
@@ -19,21 +21,35 @@ import { IDependencies } from "../../../application/interfaces/IDependencies";
             }
 
             if (!isValidNumber(limit)) {
-                res.status(400).json({
+                res.status(httpStatusCode.BAD_REQUEST).json({
                     success: false,
                     message: "Invalid limit number",
                 });
                 return;
             }
-            const result = await getCoursesForInstructorUseCase(dependencies).execute(page, limit,id);         
+
+              const {search,category,pricing,level,sort,minPrice,maxPrice } = req.query.filters as CourseFilterEntity
+                                
+                                    const filters:CourseFilterEntity = req.query.filters ? {
+                                        search: search,
+                                        category: category,
+                                        pricing: pricing ,
+                                        level: level ,
+                                        sort: sort ,
+                                        minPrice: minPrice ? Number(minPrice) : undefined,
+                                        maxPrice: maxPrice ? Number(maxPrice) : undefined,
+                                      } : {};
+
+                                      console.log(filters,">>>>>>>>>>>>>>>>>>From CONTROLLER >>>>>>>>>>>>>>>>")
+            const result = await getCoursesForInstructorUseCase(dependencies).execute(page, limit,id,filters);         
             if (!result) {
-                res.status(404).json({ success: false, message: "No courses found" });
+                res.status(httpStatusCode.NOT_FOUND).json({ success: false, message: "No courses found" });
                 return;
               }
             // console.log(`Fetched result for page ${page} and limit ${limit}:`, result);
 
             const { data, totalCount } = result;
-            res.status(200).json({
+            res.status(httpStatusCode.OK).json({
                 success: true,
                 data,totalCount,
                 message: "All Instructor courses fetched successfully",

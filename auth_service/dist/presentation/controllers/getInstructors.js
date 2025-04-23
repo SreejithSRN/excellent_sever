@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getInstructorsController = void 0;
+const httpStatusCode_1 = require("../../_lib/common/httpStatusCode");
 const getInstructorsController = (dependencies) => {
     const { useCases } = dependencies;
     const { getInstructorsUseCase } = useCases;
@@ -20,14 +21,14 @@ const getInstructorsController = (dependencies) => {
             const page = req.query.page ? parseInt(req.query.page, 10) : 1;
             const limit = req.query.limit ? parseInt(req.query.limit, 10) : 10;
             if (!isValidNumber(page)) {
-                res.status(400).json({
+                res.status(httpStatusCode_1.httpStatusCode.BAD_REQUEST).json({
                     success: false,
                     message: "Invalid page number",
                 });
                 return;
             }
             if (!isValidNumber(limit)) {
-                res.status(400).json({
+                res.status(httpStatusCode_1.httpStatusCode.BAD_REQUEST).json({
                     success: false,
                     message: "Invalid limit number",
                 });
@@ -40,7 +41,7 @@ const getInstructorsController = (dependencies) => {
             }
             console.log(`Fetched result for page ${page} and limit ${limit}:`, result);
             const { data, totalCount } = result;
-            res.status(200).json({
+            res.status(httpStatusCode_1.httpStatusCode.OK).json({
                 success: true,
                 data, totalCount,
                 message: "All Instructors fetched successfully",

@@ -10,7 +10,6 @@ const cors_1 = __importDefault(require("cors"));
 const express_http_proxy_1 = __importDefault(require("express-http-proxy"));
 const morgan_1 = __importDefault(require("morgan"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const logger_1 = require("./middleware/logger");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -35,11 +34,11 @@ const corsOptions = {
 app.use((0, cors_1.default)(corsOptions));
 app.options("*", (0, cors_1.default)(corsOptions));
 // Rate Limiting (15 minutes, max 100 requests)
-const limiter = (0, express_rate_limit_1.default)({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100,
-});
-app.use(limiter);
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100,
+// });
+// app.use(limiter);
 // API Gateway Routing
 const routes = [
     // { path: "/api/user", serviceUrl: process.env.USER_SERVICE },

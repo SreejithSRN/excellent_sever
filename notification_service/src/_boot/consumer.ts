@@ -28,14 +28,22 @@ export const startConsumer = async () => {
 
 				try {
 					await subscriber[subscriberMethod](subscriberData);
-				} catch (error: any) {
-					console.error("❌ Error while processing subscriber method:", error?.message);
-				}
+				} catch (error) {
+					if (error instanceof Error) {
+					  console.error("❌ Error while processing subscriber method:", error.message);
+					} else {
+					  console.error("❌ Unknown error occurred:", error);
+					}
+				  }
 			},
 		});
-	} catch (error: any) {
-		console.error("Kafka Consume Error:", error?.message);
-	}
+	} catch (error) {
+		if (error instanceof Error) {
+		  console.error("Kafka Consume Error:", error.message);
+		} else {
+		  console.error("Kafka Consume Unknown Error:", error);
+		}
+	  }
 };
 
 export const stopConsumer = async () => {

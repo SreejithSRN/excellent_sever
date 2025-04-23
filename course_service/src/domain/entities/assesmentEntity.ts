@@ -24,12 +24,13 @@ export type OptionLabel = "A" | "B" | "C" | "D";
 
 
 export interface AssessmentView  {
-  courseTitle: string;
-  instructorName: string;
-  lessonsCount: number;
-  status:boolean
-  mark: number ;
+  courseTitle?: string;
+  instructorName?: string;
+  lessonsCount?: number;
+  status?:boolean
+  mark?: number[] ;
   certificateUrl?: string;
   studentName?: string;
+  studentEmail?:string
 };
 

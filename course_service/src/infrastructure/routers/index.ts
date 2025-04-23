@@ -6,8 +6,11 @@ import { Role } from "../../domain/entities";
 
 export const routes=(dependencies:IDependencies)=>{
     const router= Router()
-    const {addCategory,getCategories,blockUnblockCat,addCourse,getCourses,getCoursesById,toggleBlockCourse,assessmentDelete,getTestAssessment,
-        studentAssessmentsList,submitAssessment,getCoursesForInstructor,createEnrollment,getStudentMyCourses,checkEnrollment,getMyCoursesById,streamVideo,createAssesment,assessmentList}=controllers(dependencies)
+    const {addCategory,getCategories,blockUnblockCat,addCourse,getCourses,getCoursesById,
+        toggleBlockCourse,assessmentDelete,getTestAssessment,
+        studentAssessmentsList,submitAssessment,getCoursesForInstructor,
+        createEnrollment,getStudentMyCourses,checkEnrollment,getMyCoursesById,instructorAssessmentsList,
+        streamVideo,createAssesment,assessmentList}=controllers(dependencies)
 
     router.route("/addCategory").post(roleAuthMiddleware(Role.admin),addCategory)
     router.route("/getCategories").get(roleAuthMiddleware(),getCategories)
@@ -31,11 +34,11 @@ export const routes=(dependencies:IDependencies)=>{
     router.route("/createAssesment").post(roleAuthMiddleware(Role.instructor),createAssesment)
     router.route("/assessmentList/:id").get(roleAuthMiddleware(Role.instructor),assessmentList)
     router.route("/assessmentDelete/:id").delete(roleAuthMiddleware(Role.instructor),assessmentDelete)
+
     router.route("/getTestAssessment/:id").get(roleAuthMiddleware(Role.student),getTestAssessment)
-
-
     router.route("/submitAssessment/:id").post(roleAuthMiddleware(Role.student),submitAssessment)
     router.route("/studentAssessmentsList").get(roleAuthMiddleware(Role.student),studentAssessmentsList)
+    router.route("/instructorAssessmentsList").get(roleAuthMiddleware(Role.instructor),instructorAssessmentsList)
 
     return router
 

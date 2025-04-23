@@ -42,3 +42,14 @@ export interface Lesson {
     video?: File|string;
     duration?: string;    
 }
+
+export interface CourseFilterEntity {
+    level?:string
+    search?: string;
+    category?: string;
+    pricing?: string
+    minPrice?: number;
+    maxPrice?: number;
+    sort?: string
+  }
+  

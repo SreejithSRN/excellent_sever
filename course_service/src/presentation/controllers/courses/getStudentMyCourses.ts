@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../../application/interfaces/IDependencies";
 import { httpStatusCode } from "../../../_lib/common/httpStatusCode";
+import { CourseFilterEntity } from "../../../domain/entities/courseEntity";
 
  export const getStudentMyCoursesController=(dependencies:IDependencies)=>{
     const {useCases:{getStudentMyCoursesUseCase}}=dependencies
@@ -26,7 +27,21 @@ import { httpStatusCode } from "../../../_lib/common/httpStatusCode";
                 });
                 return;
             }
-            const result = await getStudentMyCoursesUseCase(dependencies).execute(page, limit,id);         
+
+            const {search,category,pricing,level,sort,minPrice,maxPrice } = req.query.filters as CourseFilterEntity
+                    
+                        const filters:CourseFilterEntity = req.query.filters ? {
+                            search: search,
+                            category: category,
+                            pricing: pricing ,
+                            level: level ,
+                            sort: sort ,
+                            minPrice: minPrice ? Number(minPrice) : undefined,
+                            maxPrice: maxPrice ? Number(maxPrice) : undefined,
+                          } : {};
+
+                          
+            const result = await getStudentMyCoursesUseCase(dependencies).execute(page, limit,id,filters);         
             if (!result) {
                 res.status(httpStatusCode.NOT_FOUND).json({ success: false, message: "No courses found" });
                 return;

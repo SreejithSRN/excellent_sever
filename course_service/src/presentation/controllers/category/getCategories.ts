@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../../application/interfaces/IDependencies";
+import { httpStatusCode } from "../../../_lib/common/httpStatusCode";
 
 export const getCategoriesController=(dependencies:IDependencies)=>{
     const {useCases:{getCategoriesUseCase}}=dependencies
@@ -19,7 +20,7 @@ export const getCategoriesController=(dependencies:IDependencies)=>{
             }
 
             if (!isValidNumber(limit)) {
-                res.status(400).json({
+                res.status(httpStatusCode.BAD_REQUEST).json({
                     success: false,
                     message: "Invalid limit number",
                 });
@@ -27,13 +28,13 @@ export const getCategoriesController=(dependencies:IDependencies)=>{
             }
             const result = await getCategoriesUseCase(dependencies).execute(page, limit);
             if (!result) {
-                res.status(404).json({ success: false, message: "No categories found" });
+                res.status(httpStatusCode.NOT_FOUND).json({ success: false, message: "No categories found" });
                 return;
               }
             // console.log(`Fetched result for page ${page} and limit ${limit}:`, result);
 
             const { data, totalCount } = result;
-            res.status(200).json({
+            res.status(httpStatusCode.OK).json({
                 success: true,
                 data,totalCount,
                 message: "All categories fetched successfully",

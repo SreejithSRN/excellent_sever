@@ -1,5 +1,5 @@
 import { IDependencies } from "../../application/interfaces/IDependencies";
-import { assessmentDeleteController, assessmentListController, createAssesmentController, getTestAssessmentController, studentAssessmentsListController, submitAssessmentController } from "./assesment";
+import { assessmentDeleteController, assessmentListController, createAssesmentController, getTestAssessmentController, instructorAssessmentsListController, studentAssessmentsListController, submitAssessmentController } from "./assesment";
 import {
   addCategoryController,
   getCategoriesController,
@@ -43,5 +43,6 @@ export const controllers = (dependencies: IDependencies) => {
     getTestAssessment:getTestAssessmentController(dependencies),
     submitAssessment:submitAssessmentController (dependencies),
     studentAssessmentsList:studentAssessmentsListController (dependencies),
+    instructorAssessmentsList:instructorAssessmentsListController (dependencies),
   };
 };

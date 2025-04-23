@@ -15,7 +15,8 @@ import {
   IDeleteAssessmentUseCase,
   IGetTestAssessmentUseCase,
   ISubmitAssessmentUseCase,
-  IStudentAssessmentsListUseCase
+  IStudentAssessmentsListUseCase,
+  IInstructorAssessmentsListUseCase
   
 } from "../../domain/IUseCases";
 
@@ -50,4 +51,5 @@ export interface IUseCases {
   submitAssessmentUseCase :(dependencies:IDependencies)=>ISubmitAssessmentUseCase
 
   studentAssessmentsListUseCase :(dependencies:IDependencies)=>  IStudentAssessmentsListUseCase 
+  instructorAssessmentsListUseCase :(dependencies:IDependencies)=>  IInstructorAssessmentsListUseCase 
 }

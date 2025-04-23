@@ -36,11 +36,11 @@ app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
 // Rate Limiting (15 minutes, max 100 requests)
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
-});
-app.use(limiter);
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100,
+// });
+// app.use(limiter);
 
 // API Gateway Routing
 const routes = [

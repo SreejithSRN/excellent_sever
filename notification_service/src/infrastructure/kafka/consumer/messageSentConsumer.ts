@@ -1,25 +1,3 @@
-// // infrastructure/kafka/consumer/messageSentConsumer.ts
-// // import { sendMessageNotification } from "../../services/notification";
-// import { MessageEntity } from "../../../domain/entities";
-
-// export default async (data: MessageEntity) => {
-// 	try {
-		
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		console.log(">>>>>>>>>>>iam here in notification messagesent consumer",data)
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-// 		// await sendMessageNotification(data);
-// 	} catch (error: any) {
-// 		console.error("message-sent-consumer error:", error?.message);
-// 	}
-// };
-
 import { sendMessage } from "../../../_lib/utility/sendMessage/sendMessage";
 import { MessageEntity } from "../../../domain/entities";
 
@@ -42,8 +20,12 @@ export default async (data: MessageEntity) => {
 		console.log("messagesent through notification service")
 
     console.log(`✅ Notification sent to ${email}`);
-  } catch (error: any) {
-    console.error("❌ Error in message-sent-consumer:", error?.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("❌ Error in message-sent-consumer:", error.message);
+    } else {
+      console.error("❌ Unknown error in message-sent-consumer:", error);
+    }
   }
 };
 

@@ -34,7 +34,7 @@ export const getStudentAssessments = async (
       instructorName: enroll.courseId?.instructorRef?.name ?? "N/A",
       lessonsCount: enroll.courseId?.lessons?.length ?? 0,
       status: enroll.isTestCompleted ?? false,
-      mark: enroll.mark ?? 0,
+      mark: Array.isArray(enroll.mark) ? enroll.mark : [enroll.mark ?? 0],
       certificateUrl: enroll.certificateUrl ?? null,
       studentName: enroll.studentId?.name ?? "Student",
     }));

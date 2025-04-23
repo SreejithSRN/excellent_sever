@@ -1,5 +1,5 @@
 import { constant } from "../../../_lib/common/constant";
-import { CourseEntity } from "../../../domain/entities/courseEntity";
+import { CourseEntity, CourseFilterEntity } from "../../../domain/entities/courseEntity";
 import { IDependencies } from "../../interfaces/IDependencies";
 
 export const getStudentMyCoursesUseCase=(dependencies:IDependencies)=>{
@@ -8,10 +8,11 @@ export const getStudentMyCoursesUseCase=(dependencies:IDependencies)=>{
         execute: async (
             page?: number,
             limit?: number,
-            id?:string
+            id?:string,
+            filters?:CourseFilterEntity
           ):Promise<{ data: CourseEntity[]; totalCount: number } | null>=>{
             try {
-                let result = await getStudentMyCourses(page, limit,id);
+                let result = await getStudentMyCourses(page, limit,id,filters);
                 return result
                 
             } catch (error: unknown) {

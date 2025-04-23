@@ -1,8 +1,8 @@
 import { IDependencies } from "../../interfaces/IDependencies";
 
-interface GetStudentAssessmentsInput {
-  studentId: string;
-}
+// interface GetStudentAssessmentsInput {
+//   studentId: string;
+// }
 
 export const studentAssessmentsListUseCase = (dependencies: IDependencies) => {
   const {

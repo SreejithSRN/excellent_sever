@@ -26,6 +26,7 @@ const controllers = (dependencies) => {
         getTestAssessment: (0, assesment_1.getTestAssessmentController)(dependencies),
         submitAssessment: (0, assesment_1.submitAssessmentController)(dependencies),
         studentAssessmentsList: (0, assesment_1.studentAssessmentsListController)(dependencies),
+        instructorAssessmentsList: (0, assesment_1.instructorAssessmentsListController)(dependencies),
     };
 };
 exports.controllers = controllers;

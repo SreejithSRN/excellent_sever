@@ -1,9 +1,10 @@
-import { CourseEntity } from "../../entities/courseEntity";
+import { CourseEntity, CourseFilterEntity } from "../../entities/courseEntity";
 
 
 export interface IGetCoursesUseCase {
     execute(
       page?: number,
-      limit?: number
+      limit?: number,
+      filters?:CourseFilterEntity
     ): Promise<{ data: CourseEntity[]; totalCount: number } | null>;
   }
